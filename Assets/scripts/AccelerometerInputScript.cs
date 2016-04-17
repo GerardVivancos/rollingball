@@ -5,14 +5,14 @@ using System.Collections;
 public class AccelerometerInputScript : MonoBehaviour {
 
 	public float speed;
-	public GameObject textCanvas;
+	//public GameObject textObject;
 
 	private Rigidbody rb;
-	private Text text;
+	public Text text;
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
-		text = textCanvas.GetComponent<Text> ();
+		//text = textObject.GetComponent<Text> ();
 	}
 
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class AccelerometerInputScript : MonoBehaviour {
 
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 		if (movement.ToString() != null) {
-			text.text = "(X: " + Input.acceleration.x + ", Y: " + Input.acceleration.y + ", Z: " + Input.acceleration.z + ")\n moveHorizontal: " + moveHorizontal + " moveVertical:" +moveVertical;
+			text.text = "(X: " + Input.acceleration.x + ", Y: " + Input.acceleration.y + ", Z: " + Input.acceleration.z + ")\nmoveHorizontal: " + moveHorizontal + "\nmoveVertical:" +moveVertical;
 		}
 
 		rb.AddForce (movement * speed);
