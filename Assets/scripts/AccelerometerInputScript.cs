@@ -17,12 +17,16 @@ public class AccelerometerInputScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		float moveHorizontal = (float) System.Math.Round(Input.acceleration.x, 1);
-		float moveVertical = (float) System.Math.Round(Input.acceleration.y, 1);
 
-		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-		if (movement.ToString() != null) {
-			text.text = "(X: " + Input.acceleration.x + ", Y: " + Input.acceleration.y + ", Z: " + Input.acceleration.z + ")\nmoveHorizontal: " + moveHorizontal + "\nmoveVertical:" +moveVertical;
+        Vector3 movement = Vector3.zero;
+        movement.x = Input.acceleration.x;
+        movement.z = Input.acceleration.y;
+        if (movement.sqrMagnitude > 1) {
+            movement.Normalize();
+        }
+
+        if (movement.ToString() != null) {
+			text.text = "(X: " + Input.acceleration.x + ", Y: " + Input.acceleration.y + ", Z: " + Input.acceleration.z + ")\nmoveHorizontal: " + movement.x + "\nmoveVertical:" + movement.z;
 		}
 
 		rb.AddForce (movement * speed);
